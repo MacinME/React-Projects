@@ -1,26 +1,23 @@
 import { collections } from '../data/collections';
 import { GAddCollection } from './GAddCollection';
 import { GCollection } from './GCollection';
+import { GTabs } from './GTabs';
 
-export const GContent = ({ width }) => {
+export const GContent = () => {
   return (
-    
-    <section className={`${ width > 1200 && ' w-3/6 mx-auto h-full' } ${ width < 800 && ' overflow-y-scroll pb-20' } h-2/3 px-4`} >
-       <div className={`${ width < 800 && 'justify-items-center' } bg-background_color w-full grid grid-cols-2 gap-3 pt-10 pb-3 ${ width > 799 && 'grid-cols-3 '} ${ width > 999 && 'justify-items-start'}`}>
-
-       {
-            collections.map(( c ) => (
-                <GCollection 
-                    key={ c.id }
-                    width={ width }
-                    {...c}
-                />
-            ))
-        }
-       <GAddCollection width={ width } />
-
+    <section className="h-2/3 px-4 overflow-y-scroll pb-20 xl:w-3/6 xl:mx-auto xl:h-full lg:overflow-hidden" >
+       <div className="bg-background_color w-full grid grid-cols-2 gap-3 pt-10 justify-items-center sm:grid-cols-3 lg:grid-cols-4 xl:justify-items-start xl:grid-cols-3" >
+          <GTabs />
+        {
+              collections.map(( c ) => (
+                  <GCollection 
+                      key={ c.id }
+                      {...c}
+                  />
+              ))
+          }
+        <GAddCollection />
        </div>
-
     </section>
   )
 }

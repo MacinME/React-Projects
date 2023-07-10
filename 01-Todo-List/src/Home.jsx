@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { GContent, GTabs } from './components/global';
-import { MHeader, MNavbar } from './components/mobile';
+import { GContent } from './components/global';
+import { MNavbar } from './components/mobile';
 import { DNavbar } from './components/desktop';
 
 export const Home = () => {
@@ -27,22 +27,19 @@ export const Home = () => {
   return (
     <main 
       ref={ resizeRef }
-      className='w-full bg-background_color h-full relative'
+      className="w-full bg-background_color h-full relative"
     >
-      {/* Title */}
+      {/* Desktop Menu */}
       {
-        boxSize < 800 ? <MHeader /> : <DNavbar />
+        boxSize > 1023 && <DNavbar />
       }
 
-      {/* Tabs */}
-      <GTabs width={ boxSize } />
-
       {/* Content */}
-      <GContent width={ boxSize } />
+      <GContent />
 
-      {/* Menu Icons */}
+      {/* Mobile Menu */}
       {
-        boxSize < 800 && <MNavbar />
+        boxSize < 1024 && <MNavbar />
       }
     </main>
   )

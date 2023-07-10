@@ -14,21 +14,21 @@ export const collections = [
     {
         id: 2,
         title: 'Personal',
-        done: '4/8',
+        done: '4/10',
         icon: Personal,
         style: 'bg-teal-400'
     },
     {
         id: 3,
         title: 'Code',
-        done: '4/8',
+        done: '2/50',
         icon: Code,
         style: 'bg-purple-400'
     },
     {
         id: 4,
         title: 'Groceries',
-        done: '4/8',
+        done: '1/15',
         icon: Groceries,
         style: 'bg-yellow-600'
     },

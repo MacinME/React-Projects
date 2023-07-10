@@ -1,4 +1,3 @@
-
 export const MHeader = () => {
   return (
     <div className="w-full h-24 bg-background_color px-8 py-8">
