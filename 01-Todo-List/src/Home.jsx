@@ -12,7 +12,7 @@ export const Home = () => {
   const [boxSize, setBoxsize] = useState(null);
   const [collection, setCollection] = useState(false);
   const [collectionState, setCollectionState] = useState(
-    JSON.parse(localStorage.getItem('collections')) || []
+    JSON.parse(localStorage.getItem('collections')) || collections
   );
   
   const [tasks, setTasks] = useState({
@@ -31,6 +31,7 @@ export const Home = () => {
   onSetLocalStorage();
 
   useEffect(() => {
+
     const onResize = () => {
       const size = resizeRef.current.offsetWidth;
       setBoxsize(size);
