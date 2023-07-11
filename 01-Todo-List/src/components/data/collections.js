@@ -7,28 +7,28 @@ export const collections = [
     {
         id: 1,
         title: 'School',
-        done: '4/8',
+        done: '0/0',
         icon: Book,
         style: 'bg-pink-400'
     },
     {
         id: 2,
         title: 'Personal',
-        done: '4/10',
+        done: '0/0',
         icon: Personal,
         style: 'bg-teal-400'
     },
     {
         id: 3,
         title: 'Code',
-        done: '2/50',
+        done: '0/0',
         icon: Code,
         style: 'bg-purple-400'
     },
     {
         id: 4,
         title: 'Groceries',
-        done: '1/15',
+        done: '0/0',
         icon: Groceries,
         style: 'bg-yellow-600'
     },
