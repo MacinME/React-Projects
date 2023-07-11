@@ -29,7 +29,8 @@ export const GNewCollection = ({ setCollection, setCollectionState }) => {
             title: collection,  
             done: filtered[0].done,
             icon: filtered[0].icon,
-            style: filtered[0].style
+            style: filtered[0].style,
+            collectionTasks: []
         }]));
 
         const getData = JSON.parse(localStorage.getItem('collections')) || [];

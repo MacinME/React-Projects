@@ -4,6 +4,7 @@ import { MNavbar } from './components/mobile';
 import { DNavbar } from './components/desktop';
 import { GNewCollection } from './components/global/NewCollection/GNewCollection';
 import { collections } from './components/data/collections';
+import { CTasks } from './components/global/collectionTasks/CTasks';
 
 export const Home = () => {
 
@@ -13,6 +14,12 @@ export const Home = () => {
   const [collectionState, setCollectionState] = useState(
     JSON.parse(localStorage.getItem('collections')) || []
   );
+  
+  const [tasks, setTasks] = useState({
+    id: null,
+    status: false,
+    collection: []
+  })
 
   const onSetLocalStorage = () => {
     if(!localStorage.getItem('collections')){
@@ -38,7 +45,6 @@ export const Home = () => {
     }
   }, [])
 
-
   return (
     <main 
       ref={ resizeRef }
@@ -50,11 +56,12 @@ export const Home = () => {
       }
 
       {/* Content */}
-      <GContent 
-        setCollection={ setCollection } 
-        collectionState={ collectionState }
-      />
-
+      {
+        tasks.status
+          ? <CTasks tasks={ tasks } setTasks={ setTasks } />
+          : <GContent setCollection={ setCollection } collectionState={ collectionState } setTasks={ setTasks } />
+      }
+      
       {/* Mobile Menu */}
       {
         boxSize < 1024 && <MNavbar />
