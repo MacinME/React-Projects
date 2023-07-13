@@ -1,47 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Close from '../assets/close.svg';
 
 export const CItems = ({ 
     id, 
     taskName, 
-    date, 
-    status, 
-    idCollection,
-    updateLocalStorage 
+    date,
+    status,
+    onDeleteDataFromLocalStorage,
+    tasks,
+    onUpdateLocalStorage
   }) => {
 
-  const [ischecked, setIscChecked] = useState( status );
-  const [tasks, setTasks] = useState([]);
+    const [ischecked, setIschecked] = useState( status );
 
-  useEffect(() => {
-    const getData = JSON.parse(localStorage.getItem('collections'));
-    const collection = getData.find(c => c.id === idCollection);
-    if(collection){
-      setTasks(collection.collectionTasks);
-    }
-  }, [idCollection])
+    const onSuccessTask = (evt) => {
 
-  const onCheckInput = (evt) => {
-    setIscChecked(evt.target.checked);
-    const updatedTasks = tasks.filter( task => {
-      if(task.id === id){
-        task.status = evt.target.checked;
-      }
-      return task;
-    });
+      setIschecked(evt.target.checked);
 
-    updateLocalStorage(updatedTasks);
-  }
-
-  const onDeleteTask = (idTask) => {
-    const updatedTasks = tasks.filter( task => {
-        if(task.id !== idTask){
-          return task
+      const updatedTasks = tasks.map( task => {
+        if(task.id === id){
+          task.status = evt.target.checked;
         }
-    });
-
-    updateLocalStorage(updatedTasks);
-}
+        return task;
+      });
+    
+      onUpdateLocalStorage(updatedTasks);
+    }
 
   return (
     <div className="bg-navbar_color rounded-xl w-full py-1 px-2">
@@ -49,7 +33,7 @@ export const CItems = ({
           <div className='flex gap-2'>
             <input 
                   type="checkbox"
-                  onChange={ onCheckInput } 
+                  onChange={ onSuccessTask } 
                   checked={ ischecked }
                   className="accent-pink-500 rounded-full"
               />
@@ -60,7 +44,7 @@ export const CItems = ({
           </div>
 
           <button
-            onClick={ () => onDeleteTask(id) }
+            onClick={ () => onDeleteDataFromLocalStorage(id) }
             className='text-white'
           >
             <img 

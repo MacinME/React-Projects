@@ -1,17 +1,15 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import Plus from '../../../assets/smallPlus.svg'
 import { useForm } from '../../../hooks/useForm';
 import ALeft from '../assets/aLeft.svg';
 import { CItems } from './CItems';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 
-export const CTasks = ({ tasks, setTasks }) => {
+export const CTasks = ({ state, setState }) => {
+    const { collection: { title, id } } = state;
 
-    const { collection: { title, id } } = tasks;
-    const initialValues = JSON.parse(localStorage.getItem('collections')).filter( t => t.id === id)[0].collectionTasks;
-
-    const [displayTasks, setDisplayTasks] = useState( initialValues );
-
-    const { simpleForm, onInputChange, taskName, onResetForm } = useForm({
+    const { tasks, setTasks, onGetDataById, onDeleteDataFromLocalStorage, onUpdateLocalStorage } = useLocalStorage(id);
+    const { simpleForm, taskName, onInputChange, onResetForm } = useForm({
         id: null,
         taskName: '',
         date: new Date().toLocaleDateString(),
@@ -21,45 +19,28 @@ export const CTasks = ({ tasks, setTasks }) => {
     const onAddTask = (e) => {
         e.preventDefault();
         if( taskName.trim().length < 2 ) return;    
+        const { collectionTasks } = onGetDataById(id);
+        const newValues = [...collectionTasks, {
+            ...simpleForm,
+            id: Date.now()
+        }];
 
-        const getData = JSON.parse( localStorage.getItem('collections') );
-        const newTasks = getData.map((c) => {
-            if(c.id === id){
-                c.collectionTasks = [...c.collectionTasks, {
-                    ...simpleForm,
-                    id: Date.now()
-                }];
-            }
-            return c;
-        });
-
-        localStorage.setItem('collections', JSON.stringify( newTasks ));
-        const getTasks = JSON.parse(localStorage.getItem('collections'));
-        const getTask = getTasks.filter( t => t.id === id);
-        setDisplayTasks( getTask[0].collectionTasks  );
+        onUpdateLocalStorage( newValues );
         onResetForm();
     }
 
-    const updateLocalStorage = (updatedTasks) => {
-        const getData = JSON.parse(localStorage.getItem('collections'));
-    
-        const updatedData = getData.map(collection => {
-          if(collection.id === id){
-            collection.collectionTasks = updatedTasks;
-          }
-          return collection;
-        });
-    
-        localStorage.setItem('collections', JSON.stringify( updatedData ));
-        setDisplayTasks( updatedTasks );
-    }
-    
+    useEffect(() => {
+        const data = onGetDataById(id);
+        if(data){
+            setTasks( data.collectionTasks );
+        }
+    }, [id])
 
   return (
     <div className="w-full flex flex-col gap-5 px-4 lg:w-3/6 lg:mx-auto pt-5 lg:pt-20">
         <div className="flex items-center gap-4 rounded-xl">
             <button
-                onClick={ () => setTasks({ status: false, collection: [] }) }
+                onClick={ () => setState({ status: false, collection: [] }) }
                 className='w-10 h-10 bg-navbar_color flex items-center justify-center rounded-xl py-1'
             >
                 <img 
@@ -97,13 +78,13 @@ export const CTasks = ({ tasks, setTasks }) => {
 
         <div className='flex flex-col gap-3'>
             {
-                displayTasks.map( task => (
-                    <CItems 
-                        key={ task.id } 
-                        idCollection={ id }
-                        // onDeleteTask={ onDeleteTask }
-                        updateLocalStorage={ updateLocalStorage }
+                tasks.map( task => (
+                    <CItems
+                        key={ task.id }
                         {...task}
+                        tasks={ tasks } 
+                        onUpdateLocalStorage={ onUpdateLocalStorage }
+                        onDeleteDataFromLocalStorage={ onDeleteDataFromLocalStorage }
                     />
                 ))
             }

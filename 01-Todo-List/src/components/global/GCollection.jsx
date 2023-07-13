@@ -1,9 +1,9 @@
 import { GIcon } from './GIcon';
 
-export const GCollection = ({ id, icon, title, done, style, collectionTasks, setTasks}) => {
+export const GCollection = ({ id, icon, title, done, style, collectionTasks, setState}) => {
   return (
     <div 
-      onClick={ () => setTasks({ status: true, collection: { id, title, collectionTasks} }) }
+      onClick={ () => setState({ status: true, collection: { id, title, collectionTasks} }) }
       className="bg-collection_color w-full h-40 p-5 rounded-xl cursor-pointer hover:bg-collection_hover overflow-hidden sm:w-48 sm:h-48" 
     >
         <div className="w-full mb-8 sm:mb-14" >

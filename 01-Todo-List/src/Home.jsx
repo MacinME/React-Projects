@@ -5,32 +5,31 @@ import { DNavbar } from './components/desktop';
 import { GNewCollection } from './components/global/NewCollection/GNewCollection';
 import { collections } from './components/data/collections';
 import { CTasks } from './components/global/collectionTasks/CTasks';
+import { useLocalStorage } from './hooks/useLocalStorage';
 
 export const Home = () => {
 
   const resizeRef = useRef(null);
   const [boxSize, setBoxsize] = useState(null);
+  const { onSetData, onGetData } = useLocalStorage();
   const [collection, setCollection] = useState(false);
-  const [collectionState, setCollectionState] = useState(
-    JSON.parse(localStorage.getItem('collections')) || collections
-  );
-  
-  const [tasks, setTasks] = useState({
+  const [collectionState, setCollectionState] = useState([]);
+    
+  const [state, setState] = useState({
     id: null,
     status: false,
     collection: []
   })
 
-  const onSetLocalStorage = () => {
-    if(!localStorage.getItem('collections')){
-      localStorage.setItem('collections', JSON.stringify(collections));
-    }
-    return;
-  }
-
-  onSetLocalStorage();
-
   useEffect(() => {
+
+    if(!localStorage.getItem('collections')){
+      onSetData(collections);
+    } 
+
+    setCollectionState(
+      onGetData()
+    );
 
     const onResize = () => {
       const size = resizeRef.current.offsetWidth;
@@ -58,9 +57,9 @@ export const Home = () => {
 
       {/* Content */}
       {
-        tasks.status
-          ? <CTasks tasks={ tasks } setTasks={ setTasks } />
-          : <GContent setCollection={ setCollection } collectionState={ collectionState } setTasks={ setTasks } />
+        state.status
+          ? <CTasks state={ state } setState={ setState } />
+          : <GContent setCollection={ setCollection } collectionState={ collectionState } setState={ setState } />
       }
       
       {/* Mobile Menu */}
