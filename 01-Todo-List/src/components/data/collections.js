@@ -30,12 +30,14 @@ export const collections = [
             { 
                 id: 1689098350482, 
                 taskName: "Learning JavaScript 🔥💪🏼", 
-                date: "7/11/2023"
+                date: "7/11/2023",
+                status: false
             },
             { 
                 id: 1683438350482, 
                 taskName: "Learning React JS 🔥💪🏼", 
-                date: "7/11/2023"
+                date: "7/11/2023",
+                status: true
             },
         ]
     },

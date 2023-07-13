@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Plus from '../../../assets/smallPlus.svg'
 import { useForm } from '../../../hooks/useForm';
 import ALeft from '../assets/aLeft.svg';
@@ -9,13 +9,13 @@ export const CTasks = ({ tasks, setTasks }) => {
     const { collection: { title, id } } = tasks;
     const initialValues = JSON.parse(localStorage.getItem('collections')).filter( t => t.id === id)[0].collectionTasks;
 
-    const formRef = useRef(null);
     const [displayTasks, setDisplayTasks] = useState( initialValues );
 
     const { simpleForm, onInputChange, taskName, onResetForm } = useForm({
         id: null,
         taskName: '',
-        date: new Date().toLocaleDateString()
+        date: new Date().toLocaleDateString(),
+        status: false
     });
 
     const onAddTask = (e) => {
@@ -40,6 +40,21 @@ export const CTasks = ({ tasks, setTasks }) => {
         onResetForm();
     }
 
+    const updateLocalStorage = (updatedTasks) => {
+        const getData = JSON.parse(localStorage.getItem('collections'));
+    
+        const updatedData = getData.map(collection => {
+          if(collection.id === id){
+            collection.collectionTasks = updatedTasks;
+          }
+          return collection;
+        });
+    
+        localStorage.setItem('collections', JSON.stringify( updatedData ));
+        setDisplayTasks( updatedTasks );
+    }
+    
+
   return (
     <div className="w-full flex flex-col gap-5 px-4 lg:w-3/6 lg:mx-auto pt-5 lg:pt-20">
         <div className="flex items-center gap-4 rounded-xl">
@@ -57,8 +72,7 @@ export const CTasks = ({ tasks, setTasks }) => {
                 { title }
             </p>
         </div>
-        <form 
-            ref={ formRef }
+        <form
             onSubmit={ onAddTask }
             className="w-full flex items-center gap-3 bg-background_color px-2 rounded-xl border border-gray-700"
         >
@@ -86,11 +100,13 @@ export const CTasks = ({ tasks, setTasks }) => {
                 displayTasks.map( task => (
                     <CItems 
                         key={ task.id } 
+                        idCollection={ id }
+                        // onDeleteTask={ onDeleteTask }
+                        updateLocalStorage={ updateLocalStorage }
                         {...task}
                     />
                 ))
             }
-            
         </div>
     </div>
   )
