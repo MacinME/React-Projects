@@ -48,7 +48,7 @@ export const Home = () => {
   return (
     <main 
       ref={ resizeRef }
-      className="w-full bg-background_color h-full relative"
+      className="w-full bg-background_color h-screen relative"
     >
       {/* Desktop Menu */}
       {

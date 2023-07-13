@@ -9,7 +9,8 @@ export default {
         collection_color: '#21212b',
         tab_collection_color: '#414052',
         button_color: '#fc76a1',
-        collection_hover: '#14141b'
+        collection_hover: '#14141b',
+        button_gray: '#32323f'
       }
     },
   },
