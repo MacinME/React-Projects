@@ -1,6 +1,11 @@
 import { GIcon } from './GIcon';
+import { GProgressBar } from './GProgressBar';
 
 export const GCollection = ({ id, icon, title, style, collectionTasks, setState}) => {
+
+  const doneTasks = collectionTasks.filter(c => c.status).length;
+  const totalTasks = collectionTasks.length;
+
   return (
     <div 
       onClick={ () => setState({ status: true, collection: { id, title, collectionTasks} }) }
@@ -11,8 +16,10 @@ export const GCollection = ({ id, icon, title, style, collectionTasks, setState}
         </div>
         <div className="w-full">
             <p className="text-white text-lg font-bold sm:text-xl" >{ title }</p>
-            <div>
-                <span className="text-gray-500"> {` ${ collectionTasks.filter(c => c.status).length } / ${ collectionTasks.length }`}</span>
+            <div className="flex justify-between items-center">
+                <span className="text-gray-500"> {` ${ doneTasks } / ${ totalTasks }`}</span>
+
+                <GProgressBar progressEndValue={ doneTasks } totalTasks={ totalTasks } />
             </div>
         </div>
     </div>

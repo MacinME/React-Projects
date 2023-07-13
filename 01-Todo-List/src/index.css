@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+*,
+*:before,
+*:after{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -10,4 +12,30 @@
 
 body{
     background-color: #181820;
+}
+
+.circular-progress{
+    position: relative;
+    height: 30px;
+    width: 30px;
+    background-color: #4e4e4e;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.circular-progress:before{
+    content: "";
+    position: absolute;
+    height: 70%;
+    width: 70%;
+    background: #21212b;
+    border-radius: 50%;
+
+}
+
+.circular-value{
+    position: relative;
+    color: #fff;
+    font-size: 10px;
 }
