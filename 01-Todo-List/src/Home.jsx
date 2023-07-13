@@ -45,10 +45,15 @@ export const Home = () => {
     }
   }, [])
 
+  useEffect(() => {
+    setCollectionState( onGetData() );
+  }, [state.status])
+  
+
   return (
     <main 
       ref={ resizeRef }
-      className="w-full bg-background_color h-screen relative"
+      className={`w-full bg-background_color relative overflow-hidden ${ collection && boxSize < 640 ? "h-screen" : "h-full" }`}
     >
       {/* Desktop Menu */}
       {

@@ -1,6 +1,6 @@
 import { GIcon } from './GIcon';
 
-export const GCollection = ({ id, icon, title, done, style, collectionTasks, setState}) => {
+export const GCollection = ({ id, icon, title, style, collectionTasks, setState}) => {
   return (
     <div 
       onClick={ () => setState({ status: true, collection: { id, title, collectionTasks} }) }
@@ -12,7 +12,7 @@ export const GCollection = ({ id, icon, title, done, style, collectionTasks, set
         <div className="w-full">
             <p className="text-white text-lg font-bold sm:text-xl" >{ title }</p>
             <div>
-                <span className="text-gray-500">{ done }</span>
+                <span className="text-gray-500"> {` ${ collectionTasks.filter(c => c.status).length } / ${ collectionTasks.length }`}</span>
             </div>
         </div>
     </div>
