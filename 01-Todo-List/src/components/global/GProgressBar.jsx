@@ -8,7 +8,7 @@ export const GProgressBar = ({ progressEndValue, totalTasks }) => {
 
     useEffect(() => {
 
-        const intervalDuration = 100;
+        const intervalDuration = 80;
 
         const progress = setInterval(() => {
             setProgressvalue( (prevProgress) => {
@@ -34,7 +34,7 @@ export const GProgressBar = ({ progressEndValue, totalTasks }) => {
     )`}}>
         <div 
             className="circular-value" 
-        >{ progress > 99 &&  <img src={ DoneIcon } alt="Icon" className='w-4' /> }</div>
+        >{ progress > 99 &&  <img src={ DoneIcon } alt="Icon" className="w-4" /> }</div>
     </div>
   )
 }

@@ -8,7 +8,7 @@ import { useLocalStorage } from '../../../hooks/useLocalStorage';
 export const CTasks = ({ state, setState }) => {
     const { collection: { title, id } } = state;
 
-    const { tasks, setTasks, onGetDataById, onDeleteDataFromLocalStorage, onUpdateLocalStorage, onGetData } = useLocalStorage(id);
+    const { tasks, setTasks, onGetDataById, onDeleteDataFromLocalStorage, onUpdateLocalStorage } = useLocalStorage(id);
     const { simpleForm, taskName, onInputChange, onResetForm } = useForm({
         id: null,
         taskName: '',

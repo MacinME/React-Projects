@@ -4,7 +4,7 @@ export const DIcon = ({ icon, style }) => {
       <img 
         src={ icon } 
         alt="Icon" 
-        className='w-5'
+        className="w-5"
       />
     </div>
   )

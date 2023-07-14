@@ -2,6 +2,7 @@ import { useForm } from '../../../hooks/useForm';
 import { categories } from './data/catgories';
 import { GButton } from './GButton';
 import Folder from '../assets/folder.svg';
+import { useRef } from 'react';
 
 export const GNewCollection = ({ setCollection, setCollectionState }) => {
 
@@ -10,11 +11,15 @@ export const GNewCollection = ({ setCollection, setCollectionState }) => {
         collection: ''
     });
 
+    const collectionRef = useRef(null);
+
     const onAddCollection = (evt) => {
         const getData = JSON.parse(localStorage.getItem('collections')) || [];
 
         evt.preventDefault();
-        if( collection.trim().length < 2 || category.trim().length < 1) return;
+        if( collection.trim().length < 2 || category.trim().length < 1) {
+            return collectionRef.current.style.border = '1px #ff4662 solid';
+        };
 
         onSetLocalStorage( getData, { collection, category } );
         setCollection(false);
@@ -50,6 +55,7 @@ export const GNewCollection = ({ setCollection, setCollectionState }) => {
                         value={ collection }
                         onChange={ onInputChange }
                         autoComplete="off"
+                        ref={ collectionRef }
                         className="bg-transparent outline-none border border-gray-700 text-white text-md py-3 px-4 border-gray-200 focus:border-purple-400 rounded-xl"
                     />
                 </div>
