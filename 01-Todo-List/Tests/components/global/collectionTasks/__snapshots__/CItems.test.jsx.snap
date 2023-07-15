@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test on <CItems /> component should match with the snapshot 1`] = `
+<div>
+  <div
+    class="bg-navbar_color rounded-xl w-full py-1 px-2"
+  >
+    <div
+      class="flex justify-between"
+    >
+      <div
+        class="flex gap-2"
+      >
+        <input
+          class="accent-pink-500 rounded-full"
+          id="12345"
+          type="checkbox"
+        />
+        <div>
+          <p
+            class="text-gray-100 text-sm lg:text-base false"
+          >
+            Learning Testing with React Library
+          </p>
+          <p
+            class="text-gray-400 text-sm"
+          >
+            Date: 
+            <span
+              class="text-button_color"
+            >
+              7/14/2023
+            </span>
+          </p>
+        </div>
+      </div>
+      <button
+        class="text-white"
+      >
+        <img
+          alt="Icon"
+          class="w-4 md:w-6"
+          src="[object Object]"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;

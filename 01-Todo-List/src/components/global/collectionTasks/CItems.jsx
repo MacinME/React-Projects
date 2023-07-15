@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Close from '../assets/close.svg';
+import PropTypes from 'prop-types';
 
 export const CItems = ({ 
     id, 
@@ -57,4 +58,14 @@ export const CItems = ({
         </div>
     </div>
   )
+}
+
+CItems.propTypes = {
+  id: PropTypes.number.isRequired,
+  taskName: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  status: PropTypes.bool.isRequired,
+  onDeleteDataFromLocalStorage: PropTypes.func.isRequired,
+  tasks: PropTypes.array.isRequired,
+  onUpdateLocalStorage: PropTypes.func.isRequired
 }
