@@ -1,10 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { CItems } from '../../../../src/components/global/collectionTasks/CItems';
 
 import mockedSVGContent from '../../../__mocks__/imageMocked';
 
 jest.mock('../../../../src/components/global/assets/close.svg', () => ({
-    ReactComponent: () => <iv data-testid="mocked-svg" dangerouslySetInnerHTML={{ __html: mockedSVGContent }}  />
+    ReactComponent: () => <div data-testid="mocked-svg" dangerouslySetInnerHTML={{ __html: mockedSVGContent }}  />
 }));
 
 describe('Test on <CItems /> component', () => {
