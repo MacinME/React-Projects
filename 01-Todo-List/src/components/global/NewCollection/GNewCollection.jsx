@@ -79,7 +79,8 @@ export const GNewCollection = ({ setCollection, setCollectionState }) => {
                     <GButton 
                         setFunction={ onAddCollection } 
                         style="bg-gradient-to-r from-pink-500 via-pink-400 to-purple-500 font-bold hover:bg-gradient-to-r hover:from-pink-400 hover:via-pink-400 hover:to-pink-500"
-                        name="Add Task"                
+                        name="Add Task" 
+                        testId="addCollection"               
                     />
 
                     <GButton 
