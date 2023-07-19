@@ -1,4 +1,5 @@
 import SmallPlus from '../../assets/smallPlus.svg';
+import PropTypes from 'prop-types';
 
 export const GAddCollection = ({ setCollection }) => {
   return (
@@ -13,4 +14,8 @@ export const GAddCollection = ({ setCollection }) => {
       />
     </button>
   )
+}
+
+GAddCollection.propTypes = {
+  setCollection: PropTypes.func.isRequired
 }
