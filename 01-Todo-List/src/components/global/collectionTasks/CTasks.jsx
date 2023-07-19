@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Plus from '../../../assets/smallPlus.svg'
 import { useForm } from '../../../hooks/useForm';
 import ALeft from '../assets/aLeft.svg';
@@ -41,6 +42,7 @@ export const CTasks = ({ state, setState }) => {
         <div className="w-full bg-background_color flex flex-col gap-3 fixed top-0 left-0 py-4 px-3 lg:w-3/6 lg:top-12 lg:left-1/4">
             <div className="flex items-center gap-4 rounded-xl">
                 <button
+                    data-testid="back"
                     onClick={ () => setState({ status: false, collection: [] }) }
                     className='w-10 h-10 bg-navbar_color flex items-center justify-center rounded-xl py-1'
                 >
@@ -55,6 +57,7 @@ export const CTasks = ({ state, setState }) => {
                 </p>
             </div>
             <form
+                aria-label="form"
                 onSubmit={ onAddTask }
                 className="w-full flex items-center gap-3 bg-background_color px-2 rounded-xl border border-gray-700"
             >
@@ -94,4 +97,9 @@ export const CTasks = ({ state, setState }) => {
         </div>
     </div>
   )
+}
+
+CTasks.propTypes = {
+    state: PropTypes.object.isRequired,
+    setState: PropTypes.func.isRequired
 }

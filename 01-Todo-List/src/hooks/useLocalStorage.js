@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { collections } from '../components/data/collections';
 
 const keyName = 'collections';
 
@@ -13,7 +14,7 @@ export const useLocalStorage = (idCollection) => {
 
     // Get data from local sotrage 
     const onGetData = () => {
-        return JSON.parse( localStorage.getItem(keyName));
+        return JSON.parse( localStorage.getItem(keyName)) || collections;
     }
 
     // Main function to update the local sotrage data

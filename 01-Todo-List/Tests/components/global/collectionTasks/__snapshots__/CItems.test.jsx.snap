@@ -29,7 +29,7 @@ exports[`Test on <CItems /> component should match with the snapshot 1`] = `
             <span
               class="text-button_color"
             >
-              7/18/2023
+              7/19/2023
             </span>
           </p>
         </div>
